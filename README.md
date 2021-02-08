@@ -34,11 +34,11 @@
 
 - belongs_to :user
 - has_one :destination
-- has_many_active_hash :category
-- has_many_active_hash :status
-- has_many_active_hash :burden
-- has_many_active_hash :prefecture
-- has_many_active_hash :shipment
+- belongs_to_active_hash :category
+- belongs_to_active_hash :status
+- belongs_to_active_hash :burden
+- belongs_to_active_hash :prefecture
+- belongs_to_active_hash :shipment
 
 ## destinations テーブル
 
