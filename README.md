@@ -2,7 +2,7 @@
 
 |Column              |Type   |Options                  |
 |--------------------|-------|-------------------------|
-|name                |string |null: false, unique: true|
+|name                |string |null: false              |
 |email               |string |null: false, unique: true|
 |encrypted_password  |string |null: false              |
 |first_name          |string |null: false              |
@@ -14,7 +14,7 @@
 ### Association
 
 - has_many :items
-- has_many :purchase_historys
+- has_many :purchase_histories
 
 ## items テーブル
 
@@ -45,7 +45,7 @@
 |Column          |Type      |Options                       |
 |----------------|----------|------------------------------|
 |postal_code     |string    |null: false                   |
-|prefectures_id  |string    |null: false                   |
+|prefectures_id  |integer   |null: false                   |
 |municipality    |string    |null: false                   |
 |address         |string    |null: false                   |
 |building        |string    |                              |
