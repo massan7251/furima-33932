@@ -14,7 +14,6 @@
 ### Association
 
 - has_many :items
-- has_many :destinations
 - has_many :purchase_historys
 
 ## items テーブル
@@ -25,7 +24,7 @@
 |description  |text      |null: false                   |
 |price        |integer   |null: false                   |
 |category_id  |integer   |null: false                   |
-|stats_id     |integer   |null: false                   |
+|status_id    |integer   |null: false                   |
 |burden_id    |integer   |null: false                   |
 |prefecture_id|integer   |null: false                   |
 |shipment_id  |integer   |null: false                   |
@@ -35,32 +34,30 @@
 
 - belongs_to :user
 - has_one :destination
-- has_many_active_hash :categorys
-- has_many_active_hash :stats
-- has_many_active_hash :burdens
-- has_many_active_hash :prefectures
-- has_many_active_hash :shipments
+- has_many_active_hash :category
+- has_many_active_hash :status
+- has_many_active_hash :burden
+- has_many_active_hash :prefecture
+- has_many_active_hash :shipment
 
 ## destinations テーブル
 
-|Column         |Type      |Options                       |
-|---------------|----------|------------------------------|
-|postal_code    |string    |null: false                   |
-|prefectures_id |string    |null: false                   |
-|municipality   |string    |null: false                   |
-|address        |string    |null: false                   |
-|building       |string    |                              |
-|phone_number   |string    |null: false                   |
-|user           |references|null: false, foreign_key: true|
-|item         |references|null: false, foreign_key: true|
+|Column          |Type      |Options                       |
+|----------------|----------|------------------------------|
+|postal_code     |string    |null: false                   |
+|prefectures_id  |string    |null: false                   |
+|municipality    |string    |null: false                   |
+|address         |string    |null: false                   |
+|building        |string    |                              |
+|phone_number    |string    |null: false                   |
+|purchase_history|references|null: false, foreign_key: true|
 
 ### Association
 
-- belongs_to :user
-- belongs_to :item
-- has_many_active_hash :prefectures
+- belongs_to :purchase_history
+- belongs_to_active_hash :prefecture
 
-## purchase_historys テーブル
+## purchase_histories テーブル
 
 |Column|Type      |Options                       |
 |------|----------|------------------------------|
@@ -70,4 +67,5 @@
 ### Association
 
 - belongs_to :user
-- has_many :destination
+- belongs_to :item
+- has_one :destination
