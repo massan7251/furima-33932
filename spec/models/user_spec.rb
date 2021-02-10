@@ -29,6 +29,11 @@ context '式登録できないとき' do
     @user.valid?
     expect(@user.errors.full_messages).to include("Email can't be blank")
   end
+  it 'emailに@マークがないと登録できない' do
+    @user.email = 'test/example'
+    @user.valid?
+    expect(@user.errors.full_messages).to include("Email is invalid")
+  end
   it 'passwordが空では登録できない' do
     @user.password = ''
     @user.valid?
