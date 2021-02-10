@@ -9,7 +9,6 @@ RSpec.describe User, type: :model do
 describe 'ユーザー新規登録' do
 context '新規登録できるとき' do
   it 'name,email,password,assword_confirmation,first_name,last_name,first_name_kana,last_name,kana,birthdayが存在すれば登録できる' do
-    @user = User.new(name: 'test太郎', email: 'testtarou@example', password: 'abc123', password_confirmation: 'abc123', last_name: '太郎' ,first_name: 'テスト', last_name_kana: 'タロウ', first_name_kana: 'テスト', birthday: '2021-01-11')
     expect(@user).to be_valid
   end
   it 'passwordpasswordとpassword_confirmationが6文字以上であれば登録できる' do
@@ -65,14 +64,24 @@ context '式登録できないとき' do
     expect(@user.errors.full_messages).to include("First name kana can't be blank")
   end
   it 'last_name_kanaが存在してもカナ文字でなければ登録できない' do
+    @user.last_name_kana = 'ひらがな'
+    @user.valid?
+    expect(@user.errors.full_messages).to include("Last name kana is invalid")
+  end
+  it 'firsu_name_kanaが存在してもカナ文字でなければ登録できない' do
     @user.first_name_kana = 'ひらがな'
     @user.valid?
     expect(@user.errors.full_messages).to include("First name kana is invalid")
   end
-  it 'firsu_name_kanaが存在してもカナ文字でなければ登録できない' do
-    @user.last_name_kana = 'ひらがな'
+  it 'last_name_kanaが存在しても半角文字では登録できない' do
+    @user.last_name_kana = 'ﾊﾝｶｸ'
     @user.valid?
     expect(@user.errors.full_messages).to include("Last name kana is invalid")
+  end
+  it 'first_name_kanaが存在しても半角文字では登録できない' do
+    @user.first_name_kana = 'ﾊﾝｶｸ'
+    @user.valid?
+    expect(@user.errors.full_messages).to include("First name kana is invalid")
   end
   it 'birthdayが空では登録できない' do
     @user.birthday = ''
