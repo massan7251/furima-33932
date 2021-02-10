@@ -6,8 +6,6 @@ class User < ApplicationRecord
 
  with_options presence: true do
   validates :name, length: { maximum: 40 }
-  validates :email, uniqueness: true
-  validates :encrypted_password
  with_options format: { with: ~/^[^ -~｡-ﾟ]*$/ } do
   validates :first_name
   validates :last_name
@@ -16,8 +14,8 @@ class User < ApplicationRecord
   validates :first_name_kana
   validates :last_name_kana
  end
-  validates :birthday, presence: true
+  validates :birthday
+ end
   PASSWORD_REGEX = /\A(?=.*?[a-z])(?=.*?[\d])[a-z\d]+\z/i.freeze
   validates_format_of :password, with: PASSWORD_REGEX
- end
 end
