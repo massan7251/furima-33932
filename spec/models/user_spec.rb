@@ -66,22 +66,22 @@ context '式登録できないとき' do
   it 'last_name_kanaが存在してもカナ文字でなければ登録できない' do
     @user.last_name_kana = 'ひらがな'
     @user.valid?
-    expect(@user.errors.full_messages).to include("Last name kana is invalid")
+    expect(@user.errors.full_messages).to include("Last name kana Full-width katakana characters")
   end
   it 'firsu_name_kanaが存在してもカナ文字でなければ登録できない' do
     @user.first_name_kana = 'ひらがな'
     @user.valid?
-    expect(@user.errors.full_messages).to include("First name kana is invalid")
+    expect(@user.errors.full_messages).to include("First name kana Full-width katakana characters")
   end
   it 'last_name_kanaが存在しても半角文字では登録できない' do
     @user.last_name_kana = 'ﾊﾝｶｸ'
     @user.valid?
-    expect(@user.errors.full_messages).to include("Last name kana is invalid")
+    expect(@user.errors.full_messages).to include("Last name kana Full-width katakana characters")
   end
   it 'first_name_kanaが存在しても半角文字では登録できない' do
     @user.first_name_kana = 'ﾊﾝｶｸ'
     @user.valid?
-    expect(@user.errors.full_messages).to include("First name kana is invalid")
+    expect(@user.errors.full_messages).to include("First name kana Full-width katakana characters")
   end
   it 'birthdayが空では登録できない' do
     @user.birthday = ''
