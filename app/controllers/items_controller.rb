@@ -23,6 +23,12 @@ class ItemsController < ApplicationController
   end
 
   def edit
+    unless user_signed_in?
+      redirect_to user_session_path
+    end
+    unless user_signed_in? && current_user.id == @item.user_id
+      redirect_to root_path
+    end
   end
 
   def update
