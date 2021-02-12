@@ -17,7 +17,7 @@ context '新規登録できるとき' do
     expect(@user).to be_valid
   end
 end
-context '式登録できないとき' do
+context '新規登録できないとき' do
   it 'nameが空では登録できない' do
     @user.name = ''
     @user.valid?
