@@ -2,6 +2,7 @@ class ItemsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
   before_action :set_item, only: [:show, :edit, :update, :destroy]
   before_action :restriction_user, only: [:edit, :destory]
+  before_action :item_sold, only: [:edit]
 
   def index
     @item = Item.all.order("created_at DESC")
@@ -48,6 +49,12 @@ class ItemsController < ApplicationController
 
   def item_params
     params.require(:item).permit(:image, :name, :price, :description, :category_id, :status_id, :burden_id, :prefecture_id, :shipment_id).merge(user_id: current_user.id)
+  end
+
+  def item_sold
+    if @item.purchase_history.present?
+      redirect_to root_path
+    end
   end
 
   def restriction_user
