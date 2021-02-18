@@ -68,10 +68,25 @@ RSpec.describe DestinationPurchaseHistory, type: :model do
     @destination_purchase_historiy.valid?
     expect(@destination_purchase_historiy.errors.full_messages).to include("Phone number is invalid")
   end
+  it 'phone_numberは英数混合では登録できない' do
+    @destination_purchase_historiy.phone_number = '123-abcd'
+    @destination_purchase_historiy.valid?
+    expect(@destination_purchase_historiy.errors.full_messages).to include("Phone number is invalid")
+  end
   it 'tokenが空では登録できない' do
     @destination_purchase_historiy.token = nil
     @destination_purchase_historiy.valid?
     expect(@destination_purchase_historiy.errors.full_messages).to include("Token can't be blank")
+  end
+  it 'user_idが空では登録できない' do
+    @destination_purchase_historiy.user_id = ''
+    @destination_purchase_historiy.valid?
+    expect(@destination_purchase_historiy.errors.full_messages).to include("User can't be blank")
+  end
+  it 'item_idが空では登録できない' do
+    @destination_purchase_historiy.item_id = ''
+    @destination_purchase_historiy.valid?
+    expect(@destination_purchase_historiy.errors.full_messages).to include("Item can't be blank")
   end
  end
 end

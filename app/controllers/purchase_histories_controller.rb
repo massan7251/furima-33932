@@ -6,11 +6,9 @@ class PurchaseHistoriesController < ApplicationController
 
   def index
     @destination_purchase_history = DestinationPurchaseHistory.new
-    @item = Item.find(params[:item_id])
   end
 
   def create
-    @item = Item.find(params[:item_id])
     @destination_purchase_history = DestinationPurchaseHistory.new(destination_params)
     if @destination_purchase_history.valid?
       pay_item
