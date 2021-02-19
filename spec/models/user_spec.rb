@@ -53,6 +53,12 @@ context '新規登録できないとき' do
     @user.valid?
     expect(@user.errors.full_messages).to include("First name can't be blank")
   end
+  it '本名が日本語以外では登録できない' do
+    @user.last_name = 'hoge'
+    @user.first_name = 'huga'
+    @user.valid?
+    expect(@user.errors.full_messages).to include("First name is invalid", "Last name is invalid")
+  end
   it 'last_name_kanaが空では登録できない' do
     @user.last_name_kana = ''
     @user.valid?
